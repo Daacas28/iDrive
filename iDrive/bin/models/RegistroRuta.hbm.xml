@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-ene-2017 13:48:46 by Hibernate Tools 4.3.5.Final -->
+<hibernate-mapping>
+    <class name="models.RegistroRuta" table="registro_ruta" catalog="idrive" optimistic-lock="version">
+        <id name="idRegistro" type="java.lang.Integer">
+            <column name="id_registro" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="cliente" class="models.Cliente" fetch="select">
+            <column name="id_cliente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ruta" class="models.Ruta" fetch="select">
+            <column name="id_ruta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="vehiculos" class="models.Vehiculos" fetch="select">
+            <column name="id_vehiculo" not-null="true" />
+        </many-to-one>
+        <property name="fechaRuta" type="date">
+            <column name="fecha_ruta" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

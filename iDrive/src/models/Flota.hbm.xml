@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 24-ene-2017 13:48:46 by Hibernate Tools 4.3.5.Final -->
+<hibernate-mapping>
+    <class name="models.Flota" table="flota" catalog="idrive" optimistic-lock="version">
+        <id name="idFlota" type="java.lang.Integer">
+            <column name="id_flota" />
+            <generator class="identity" />
+        </id>
+        <property name="totalVehiculos" type="int">
+            <column name="total_vehiculos" not-null="true" />
+        </property>
+        <property name="vehiculosActuales" type="int">
+            <column name="vehiculos_actuales" not-null="true" />
+        </property>
+        <set name="vehiculoses" table="vehiculos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_flota" />
+            </key>
+            <one-to-many class="models.Vehiculos" />
+        </set>
+    </class>
+</hibernate-mapping>
