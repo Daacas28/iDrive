@@ -23,5 +23,7 @@
 	<classpathentry kind="lib" path="C:/Users/dam2/Music/PacHibernateEmpresa (1)/PacHibernateEmpresa/hibernatejar/hibernatejar/slf4j-simple-1.6.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/dam2/Music/PacHibernateEmpresa (1)/PacHibernateEmpresa/hibernatejar/hibernatejar/xerces-2.6.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/dam2/Music/PacHibernateEmpresa (1)/PacHibernateEmpresa/mysql-connector-java-5.1.18-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dam2/Downloads/jxmaps-1.2.2/lib/jxmaps-1.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dam2/Downloads/license.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
