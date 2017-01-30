@@ -22,11 +22,12 @@ import java.awt.Component;
 import javax.swing.JButton;
 import javax.swing.JScrollBar;
 
+
 public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField buscador;
-
+	private JText jola;
 	/**
 	 * Launch the application.
 	 */
