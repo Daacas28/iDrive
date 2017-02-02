@@ -27,6 +27,36 @@ public class StreetViewExample extends MapView {
 
 	public StreetViewExample() {
         super(true);
+        
+     // El JFrame con el JDesktopPane
+     		JFrame v = new JFrame("Prueba JInternalFrame");
+     		JDesktopPane dp = new JDesktopPane();
+     		v.getContentPane().add(dp);
+     		
+     		// Se construye el JInternalFrame
+     		PruebaInternalFrame prueba = new PruebaInternalFrame();
+     		JInternalFrame internal = new JInternalFrame("Un Internal Frame");
+     	//	internal.add(prueba, BorderLayout.CENTER);
+     		
+     		// Es importante darle tamaño -pack()- al JInternalFrame,
+     		// porque si no, tendrá tamaño 0,0 y no lo veremos.
+     		internal.pack();
+     		
+     		// Por defecto el JInternalFrame no es redimensionable ni
+     		// tiene el botón de cerrar, así que se lo ponemos.
+     		internal.setResizable(true);
+     		internal.setClosable(true);
+     		
+     		// Se mete el internal en el JDesktopPane
+     		dp.add(internal);
+     		
+     		// Se visualiza todo.
+     		v.setSize(500,500);
+     		v.setVisible(true);
+     		v.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+     		
+     		// Se visualiza el JInternalFrame 
+     		internal.setVisible(true);
 
         // Setting of a ready handler to MapView object. onMapReady will be called when map initialization is done and
         // the map object is ready to use. Current implementation of onMapReady customizes the map object.
@@ -77,15 +107,7 @@ public class StreetViewExample extends MapView {
     }
 
     public static void main(String[] args) {
-        final StreetViewExample sample = new StreetViewExample();
-
-        JFrame frame = new JFrame("Street View");
-
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.add(sample, BorderLayout.CENTER);
-        frame.setSize(700, 500);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
+    	new StreetViewExample();
     }
 }
 

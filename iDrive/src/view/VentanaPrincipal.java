@@ -5,9 +5,21 @@ import java.awt.EventQueue;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+
+import com.teamdev.jxmaps.ControlPosition;
+import com.teamdev.jxmaps.LatLng;
+import com.teamdev.jxmaps.Map;
+import com.teamdev.jxmaps.MapOptions;
+import com.teamdev.jxmaps.MapReadyHandler;
+import com.teamdev.jxmaps.MapStatus;
+import com.teamdev.jxmaps.MapTypeControlOptions;
+import com.teamdev.jxmaps.Polyline;
+import com.teamdev.jxmaps.PolylineOptions;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -19,15 +31,42 @@ import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.Color;
 import java.awt.Component;
-import javax.swing.JButton;
-import javax.swing.JScrollBar;
+import java.awt.Dimension;
 
+import javax.swing.JButton;
+import javax.swing.JDesktopPane;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+
+import com.teamdev.jxmaps.swing.MapView;
+import com.teamdev.jxmaps.ControlPosition;
+import com.teamdev.jxmaps.LatLng;
+import com.teamdev.jxmaps.Map;
+import com.teamdev.jxmaps.MapOptions;
+import com.teamdev.jxmaps.MapReadyHandler;
+import com.teamdev.jxmaps.MapStatus;
+import com.teamdev.jxmaps.MapTypeControlOptions;
+import com.teamdev.jxmaps.Polyline;
+import com.teamdev.jxmaps.PolylineOptions;
+import com.teamdev.jxmaps.swing.MapView;
+
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.JScrollBar;
 
 public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField buscador;
-	private JText jola;
+
 	/**
 	 * Launch the application.
 	 */
@@ -35,6 +74,10 @@ public class VentanaPrincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+				
+					System.setProperty("apple.laf.useScreenMenuBar", "true");
+					System.setProperty("com.apple.mrj.application.apple.menu.about.name", "WikiTeX");
+					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					VentanaPrincipal frame = new VentanaPrincipal();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -49,7 +92,12 @@ public class VentanaPrincipal extends JFrame {
 	 */
 	public VentanaPrincipal() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 758, 594);
+		setBounds(100, 100, 1024, 768);
+		//Dimension DimMax = Toolkit.getDefaultToolkit().getScreenSize();
+		//setMaximumSize(DimMax);
+
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setLocationRelativeTo(null);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -154,8 +202,33 @@ public class VentanaPrincipal extends JFrame {
 		pestanya_vehiculos.add(scrollBar);
 		
 		JPanel pestanya_rutas = new JPanel();
-		tabbedPane.addTab("Rutas", null, pestanya_rutas, null);
+		JDesktopPane dp = new JDesktopPane();
+		tabbedPane.addTab("Rutas", null, dp, null);
 		
+		//INICIO INTERNAL FRAME
+		JInternalFrame internalFrame = new JInternalFrame("Rutas Actuales");
+		internalFrame.setBounds(0, 0, 1535, 582);
+		dp.add(internalFrame);
+		internalFrame.setVisible(true);
+		
+		//INSTANCIAMOS LA CLASE MAPA PARA PINTAR EN EL INTERNAL FRAME, PUTOS AMOS
+		Mapa mapa = new Mapa();
+		internalFrame.getContentPane().add(mapa);
+		//FIN 
+		  JTabbedPane tabbedPaneRutas = new JTabbedPane(JTabbedPane.TOP);
+	        tabbedPaneRutas.setPreferredSize(new Dimension(300,200));
+	        internalFrame.getContentPane().add(tabbedPaneRutas, BorderLayout.EAST);
+	        
+	        JPanel panel = new JPanel();
+	        tabbedPaneRutas.addTab("Ruta Actual", null, panel, null);
+	        
+	        JPanel panel_1 = new JPanel();
+	        tabbedPaneRutas.addTab("Clientes Hoy", null, panel_1, null);
+	        
+	        JPanel panel_2 = new JPanel();
+	        panel_2.setBounds(0, 582, 1535, 214);
+	        dp.add(panel_2);
+	        
 		JPanel pestanya_usuarios = new JPanel();
 		tabbedPane.addTab("Usuarios", null, pestanya_usuarios, null);
 	}
