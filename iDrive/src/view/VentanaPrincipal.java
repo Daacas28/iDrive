@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.BorderFactory;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JPanel;
@@ -29,6 +30,8 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -61,8 +64,9 @@ import com.teamdev.jxmaps.swing.MapView;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.JScrollBar;
+import javax.swing.border.LineBorder;
 
-public class VentanaPrincipal extends JFrame {
+public class VentanaPrincipal extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
 	private JTextField buscador;
@@ -211,8 +215,12 @@ public class VentanaPrincipal extends JFrame {
 		dp.add(internalFrame);
 		internalFrame.setVisible(true);
 		
+		Double latitud1= 31.45;
+		Double latitud2= 28.45;
+		Double longitud1= 31.45;
+		Double longitud2= 33.45;
 		//INSTANCIAMOS LA CLASE MAPA PARA PINTAR EN EL INTERNAL FRAME, PUTOS AMOS
-		Mapa mapa = new Mapa();
+		Mapa mapa = new Mapa( latitud1,  longitud1,  latitud2,  longitud2);
 		internalFrame.getContentPane().add(mapa);
 		//FIN 
 		  JTabbedPane tabbedPaneRutas = new JTabbedPane(JTabbedPane.TOP);
@@ -231,5 +239,52 @@ public class VentanaPrincipal extends JFrame {
 	        
 		JPanel pestanya_usuarios = new JPanel();
 		tabbedPane.addTab("Usuarios", null, pestanya_usuarios, null);
+		pestanya_usuarios.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setLayout(new BorderLayout());
+		panel_3.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		panel_3.setBackground(Color.GRAY);
+		
+		JLabel labelUsuarios = new JLabel("sdhgfj");
+		labelUsuarios.setBounds(335, 11, 50, 14);
+		labelUsuarios.setBorder(BorderFactory.createEmptyBorder(5, 20, 5, 20));
+		
+		JButton botonActualiza = new JButton("Actualizar lista");
+		botonActualiza.setBounds(390, 7, 101, 23);
+		botonActualiza.setBorder(BorderFactory.createEmptyBorder(5, 20, 5, 20));
+		
+		JTextField fieldBuscar = new JTextField(12);
+		fieldBuscar.setBounds(496, 8, 102, 20);
+		fieldBuscar.setBorder(BorderFactory.createEmptyBorder(5, 20, 5, 20));
+	
+		panel_3.add(labelUsuarios, BorderLayout.LINE_START);
+		JPanel panel_3_1 = new JPanel();
+		panel_3_1.setBackground(Color.GRAY);
+		panel_3_1.add(botonActualiza);
+		panel_3_1.add(fieldBuscar);
+		panel_3.add(panel_3_1, BorderLayout.LINE_END);
+		pestanya_usuarios.add(panel_3, BorderLayout.NORTH);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+	
+		pestanya_usuarios.add(panel_4, BorderLayout.CENTER);
+		
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+	
+		pestanya_usuarios.add(panel_5, BorderLayout.PAGE_END);
+	}
+
+	public void creaPanel(String urlImg){
+		
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

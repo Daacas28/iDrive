@@ -1,5 +1,5 @@
 package models;
-// Generated 24-ene-2017 13:48:46 by Hibernate Tools 4.3.5.Final
+// Generated 03-feb-2017 13:15:08 by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,7 +11,10 @@ public class Ruta implements java.io.Serializable {
 
 	private Integer idRuta;
 	private int distanciaRuta;
-	private byte[] coordenadasRuta;
+	private Double latitudRuta1;
+	private Double longitudRuta1;
+	private Double latitudRuta2;
+	private Double longitudRuta2;
 	private Set registroRutas = new HashSet(0);
 
 	public Ruta() {
@@ -21,9 +24,13 @@ public class Ruta implements java.io.Serializable {
 		this.distanciaRuta = distanciaRuta;
 	}
 
-	public Ruta(int distanciaRuta, byte[] coordenadasRuta, Set registroRutas) {
+	public Ruta(int distanciaRuta, Double latitudRuta1, Double longitudRuta1, Double latitudRuta2, Double longitudRuta2,
+			Set registroRutas) {
 		this.distanciaRuta = distanciaRuta;
-		this.coordenadasRuta = coordenadasRuta;
+		this.latitudRuta1 = latitudRuta1;
+		this.longitudRuta1 = longitudRuta1;
+		this.latitudRuta2 = latitudRuta2;
+		this.longitudRuta2 = longitudRuta2;
 		this.registroRutas = registroRutas;
 	}
 
@@ -43,12 +50,36 @@ public class Ruta implements java.io.Serializable {
 		this.distanciaRuta = distanciaRuta;
 	}
 
-	public byte[] getCoordenadasRuta() {
-		return this.coordenadasRuta;
+	public Double getLatitudRuta1() {
+		return this.latitudRuta1;
 	}
 
-	public void setCoordenadasRuta(byte[] coordenadasRuta) {
-		this.coordenadasRuta = coordenadasRuta;
+	public void setLatitudRuta1(Double latitudRuta1) {
+		this.latitudRuta1 = latitudRuta1;
+	}
+
+	public Double getLongitudRuta1() {
+		return this.longitudRuta1;
+	}
+
+	public void setLongitudRuta1(Double longitudRuta1) {
+		this.longitudRuta1 = longitudRuta1;
+	}
+
+	public Double getLatitudRuta2() {
+		return this.latitudRuta2;
+	}
+
+	public void setLatitudRuta2(Double latitudRuta2) {
+		this.latitudRuta2 = latitudRuta2;
+	}
+
+	public Double getLongitudRuta2() {
+		return this.longitudRuta2;
+	}
+
+	public void setLongitudRuta2(Double longitudRuta2) {
+		this.longitudRuta2 = longitudRuta2;
 	}
 
 	public Set getRegistroRutas() {
