@@ -16,7 +16,7 @@ public class MetodosCliente extends MetodosComunes {
 	public Object consultarDatos(Session sesion) {
 		Iterator iterador;
 		
-		iterador = sesion.createQuery("FROM cliente").iterate();
+		iterador = sesion.createQuery("FROM Cliente").iterate();
 		while (iterador.hasNext()){
 			Cliente cliente = new Cliente();
 			

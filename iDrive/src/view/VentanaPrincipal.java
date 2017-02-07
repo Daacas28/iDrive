@@ -50,6 +50,11 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 import com.teamdev.jxmaps.swing.MapView;
+
+import controller.Mapa;
+import controller.MetodosRuta;
+import models.SessionFactoryUtil;
+
 import com.teamdev.jxmaps.ControlPosition;
 import com.teamdev.jxmaps.LatLng;
 import com.teamdev.jxmaps.Map;
@@ -65,20 +70,35 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.JScrollBar;
 import javax.swing.border.LineBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class VentanaPrincipal extends JFrame implements ActionListener{
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+
+
+public class VentanaPrincipal extends JFrame implements ActionListener, ChangeListener{
 
 	private JPanel contentPane;
 	private JTextField buscador;
+	private final JLabel label_Nombre_Ruta = new JLabel("New label");
+	private static Session sesion;
+	private static JTabbedPane tabbedPane;
+	
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
+		sesion = sessionFactory.openSession();
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-				
+					
+					
 					System.setProperty("apple.laf.useScreenMenuBar", "true");
 					System.setProperty("com.apple.mrj.application.apple.menu.about.name", "WikiTeX");
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -140,7 +160,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 		JLabel lblBienvenido = new JLabel("Bienvenido");
 		contentPane.add(lblBienvenido, BorderLayout.NORTH);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
+		tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		
 		JPanel panelInicio = new JPanel();
@@ -207,8 +227,27 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 		
 		JPanel pestanya_rutas = new JPanel();
 		JDesktopPane dp = new JDesktopPane();
+		
 		tabbedPane.addTab("Rutas", null, dp, null);
 		
+		tabbedPane.addChangeListener(this);
+		
+		/*tabbedPane.addChangeListener(new ChangeListener() {
+	        public void stateChanged(ChangeEvent e) {
+	            System.out.println("Tab: " + tabbedPane.getSelectedIndex());
+	            int panelEscogido = tabbedPane.getSelectedIndex();
+	            
+	            if (panelEscogido == 2){
+	            	MetodosRuta ruta = new MetodosRuta();
+	           // 	int distancia = ruta.consultarDistanciaRuta(sesion);
+	            //	int distancia = 0;
+	         
+	            	
+	            	label_Nombre_Ruta.setText(String.valueOf(distancia).trim());
+	            }
+	        }
+		});*/
+	
 		//INICIO INTERNAL FRAME
 		JInternalFrame internalFrame = new JInternalFrame("Rutas Actuales");
 		internalFrame.setBounds(0, 0, 1535, 582);
@@ -232,6 +271,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 	        
 	        JPanel panel_1 = new JPanel();
 	        tabbedPaneRutas.addTab("Clientes Hoy", null, panel_1, null);
+	        panel_1.add(label_Nombre_Ruta);
 	        
 	        JPanel panel_2 = new JPanel();
 	        panel_2.setBounds(0, 582, 1535, 214);
@@ -287,4 +327,20 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 		// TODO Auto-generated method stub
 		
 	}
-}
+
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		 System.out.println("Tab: " + tabbedPane.getSelectedIndex());
+         int panelEscogido = tabbedPane.getSelectedIndex();
+         
+        
+         	
+         	int distancia = MetodosRuta.consultarDistanciaRuta(sesion);
+         	System.out.println(distancia);
+      
+         	
+         	label_Nombre_Ruta.setText(String.valueOf(distancia));
+		
+	}
+	}
+
