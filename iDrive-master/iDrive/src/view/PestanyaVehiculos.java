@@ -1,27 +1,75 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
 
 public class PestanyaVehiculos {
 
 	private static JTabbedPane tabbedPane;
 	private JTextField buscador;
-	
-	public PestanyaVehiculos(JTabbedPane tabbedPane){
-		this.tabbedPane=tabbedPane;
+	private static JPanel principal;
+
+	private static JPanel panelLista;
+	private static JPanel panelBuscar;
+
+	private static JTextField fieldBuscar;
+
+	private static JButton boton1;
+	private static JButton boton2;
+	private static JButton boton3;
+
+	public PestanyaVehiculos(JTabbedPane tabbedPane) {
+		this.tabbedPane = tabbedPane;
 		iniciarPaneles();
 	}
-	
-	public void iniciarPaneles(){
+
+	public static void crearImageIcon(ImageIcon icon, int num) {
+
+		if (icon != null) {
+
+			Image img = icon.getImage(); // convertimos icon en una imagen
+			Image otraimg = img.getScaledInstance(120, 90, java.awt.Image.SCALE_SMOOTH); // creamos																		// antigua
+			ImageIcon otroicon = new ImageIcon(otraimg);
+
+			if (num == 1) {
+				boton1 = new JButton();
+				boton1.setIcon(otroicon);
+			} else if (num == 2) {
+				boton2 = new JButton();
+				boton2.setIcon(otroicon);
+			} else if (num == 3) {
+				boton3 = new JButton();
+				boton3.setIcon(otroicon);
+			}
+
+		} else {
+			System.err.println("No se encontro la imagen.");
+			if (num == 1) {
+				boton1.setText("Error con la imagen");
+			} else if (num == 2) {
+				boton2.setText("Error con la imagen");
+			} else if (num == 3) {
+				boton3.setText("Error con la imagen");
+			}
+
+		}
+	}
+
+	public void iniciarPaneles() {
 		JPanel pestanya_vehiculos = new JPanel();
 		tabbedPane.addTab("Vehiculos", null, pestanya_vehiculos, null);
 		pestanya_vehiculos.setLayout(null);
@@ -80,6 +128,56 @@ public class PestanyaVehiculos {
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setBounds(640, 13, 17, 451);
 		pestanya_vehiculos.add(scrollBar);
-	}
+		
+//-----------------------------------------------------
+	/*	principal = new JPanel();
+		principal.setLayout(new BorderLayout());
+		
+		panelLista = new JPanel();
+		panelBuscar = new JPanel();
+		
+		panelBuscar.setBackground(Color.WHITE);
+		panelLista.setBackground(Color.WHITE);
 	
+		//Título
+		TitledBorder titleBorder = new TitledBorder("Lista de Vehículos");
+		titleBorder.setTitleColor(Color.BLACK);
+		
+		Font titleFont = UIManager.getFont("TitledBorder.font");
+        titleBorder.setTitleFont( titleFont.deriveFont(Font.ITALIC + Font.BOLD) );
+        
+		principal.setBorder(titleBorder);
+		
+		//Buscar
+		fieldBuscar = new JTextField(10);		
+	
+		//Botones con imagen
+		for (int i = 0; i<3; i++){
+			ImageIcon icon = new ImageIcon(getClass().getResource("/img/"+(i+1)+".jpg"));
+			crearImageIcon(icon, i+1);
+		}
+	
+		//Lo añadimos al panel
+		boton1.setBorder(BorderFactory.createEmptyBorder(5, 5, 10, 10));
+		boton1.setBackground(Color.WHITE);
+	
+		boton2.setBorder(BorderFactory.createEmptyBorder(5, 5, 10, 10));
+		boton2.setBackground(Color.WHITE);
+		
+		boton3.setBorder(BorderFactory.createEmptyBorder(5, 5, 10, 10));
+		boton3.setBackground(Color.WHITE);		
+		
+		panelBuscar.add(fieldBuscar, BorderLayout.CENTER);
+		panelLista.add(boton1);
+		panelLista.add(boton2);
+		panelLista.add(boton3);
+		
+		principal.add(panelBuscar, BorderLayout.LINE_START);
+		principal.add(panelLista);
+		
+		JScrollPane scrol = new JScrollPane(principal);
+		
+		pestanya_vehiculos.add(scrol);*/
+	}
+
 }

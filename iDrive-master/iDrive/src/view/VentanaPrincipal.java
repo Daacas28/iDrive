@@ -86,7 +86,7 @@ public class VentanaPrincipal extends JFrame{
 //-----------------------------------------------------------------------------------
 
 // Instanciamos la clase PestanyaUsuario para que cree el panel de la pestaña del usuario
-		PestanyaUsuario pestanyaUsuario = new PestanyaUsuario(tabbedPane);
+		PestanyaUsuario pestanyaUsuario = new PestanyaUsuario(tabbedPane, sesion);
 //---------------------------------------------------------------------------------------
 	}
 }
